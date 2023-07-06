@@ -1,6 +1,7 @@
 import os
 import platform
 import shutil
+import subprocess
 import sys
 import urllib.request
 import zipfile
@@ -49,7 +50,7 @@ def build(source_path, build_path, install_path, targets):
         "REZ_BUILD_PROJECT_VERSION", "0.0.0"
     ).split(".")
 
-    if os_name in ["macos", "linux"]:
+    if os_name == "linux":
         raise RuntimeError(f"Your current OS is not supported ({os_name}).")
 
     blender_archive = FILE_NAME.format(
@@ -65,6 +66,7 @@ def build(source_path, build_path, install_path, targets):
     )
 
     def _build():
+        """Build the package locally."""
         archive_path = os.path.join(build_path, blender_archive)
 
         if not os.path.isfile(archive_path):
@@ -78,10 +80,16 @@ def build(source_path, build_path, install_path, targets):
             case "windows":
                 with zipfile.ZipFile(archive_path) as archive_file:
                     archive_file.extractall(build_path)
+            case "macos":
+                mac_mountpoint = "/Volumes/Blender"
+                subprocess.run(["hdiutil", "attach", archive_path])
+                shutil.copytree(os.path.join(mac_mountpoint, "Blender.app"), os.path.join(build_path, "Blender.app"))
+                subprocess.run(["hdiutil", "detach", mac_mountpoint])
             case _:
                 pass
 
     def _install():
+        """Install the package."""
         print("Installing the package.")
         extracted_archive_path = os.path.join(
             build_path, os.path.splitext(blender_archive)[0]
@@ -92,9 +100,18 @@ def build(source_path, build_path, install_path, targets):
             shutil.rmtree(install_directory)
         os.mkdir(install_directory)
 
-        for element in os.listdir(extracted_archive_path):
-            element_path = os.path.join(extracted_archive_path, element)
-            shutil.move(element_path, install_directory)
+        match os_name:
+            case "windows":
+                for element in os.listdir(extracted_archive_path):
+                    element_path = os.path.join(extracted_archive_path, element)
+                    shutil.move(element_path, install_directory)
+            case "macos":
+                shutil.move(
+                    os.path.join(build_path, "Blender.app"),
+                    os.path.join(install_directory, "Blender.app"),
+                )
+            case _:
+                pass
 
     _build()
 

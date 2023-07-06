@@ -25,7 +25,9 @@ def commands():
             "blender_debug_gpu": "blender_debug_gpu.cmd",
             "blender_debug_gpu_glitchworkaround": "blender_debug_gpu_glitchworkaround.cmd",
         },
-        "darwin": {},
+        "osx": {
+            "blender": "Blender.app/Contents/MacOS/Blender"
+        },
         "linux": {},
     }
 
