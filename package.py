@@ -1,6 +1,6 @@
 name = "blender"
 
-version = "3.5.1"
+version = "3.6.0"
 
 authors = ["The Blender Foundation", "Leo Depoix (@piloegao)"]
 
@@ -25,7 +25,9 @@ def commands():
             "blender_debug_gpu": "blender_debug_gpu.cmd",
             "blender_debug_gpu_glitchworkaround": "blender_debug_gpu_glitchworkaround.cmd",
         },
-        "darwin": {},
+        "osx": {
+            "blender": "Blender.app/Contents/MacOS/Blender"
+        },
         "linux": {},
     }
 

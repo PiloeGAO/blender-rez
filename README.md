@@ -129,7 +129,7 @@ Once installed, you can then start a rez environment with the blender package an
 ## Roadmap
 
 - [x] Windows Support
-- [ ] MacOS Support
+- [x] MacOS Support
 - [ ] Linux Support
 
 See the [open issues](https://github.com/piloegao/blender-rez/issues) for a full list of proposed features (and known issues).
