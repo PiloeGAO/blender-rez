@@ -169,7 +169,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Leo Depoix - [LinkedIn][linkedin-url] - [leodepoix.fr](www.leodepoix.fr)
+Leo Depoix - [LinkedIn][linkedin-url] - [leodepoix.fr](http://www.leodepoix.fr)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
