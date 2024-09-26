@@ -71,8 +71,14 @@ def build(source_path, build_path, install_path, targets):
 
         if not os.path.isfile(archive_path):
             print(f"Downloading Blender archive from: {download_url}")
+            
+            download_request = urllib.request.Request(
+                url=download_url,
+                headers={'User-Agent': 'Mozilla/5.0'},
+            )
+
             with open(archive_path, "wb") as file:
-                with urllib.request.urlopen(download_url) as request:
+                with urllib.request.urlopen(download_request) as request:
                     file.write(request.read())
 
         print("Extracting the archive.")
