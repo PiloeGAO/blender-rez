@@ -1,6 +1,6 @@
 name = "blender"
 
-version = "4.2.2"
+version = "4.3.0"
 
 authors = ["The Blender Foundation", "Leo Depoix (@piloegao)"]
 
